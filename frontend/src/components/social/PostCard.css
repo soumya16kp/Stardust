@@ -53,15 +53,22 @@
     white-space: pre-wrap;
 }
 
-.post-image-container {
+.post-image-container,
+.post-video-container {
     margin-bottom: 12px;
     border-radius: 8px;
     overflow: hidden;
+    background-color: black;
 }
 
 .post-image {
     max-width: 100%;
     display: block;
+}
+
+.post-video {
+    width: 100%;
+    max-height: 500px;
 }
 
 .post-actions {

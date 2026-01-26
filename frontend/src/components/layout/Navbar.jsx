@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Rocket, Menu, X } from 'lucide-react';
 import Button from '../ui/Button';
+import NotificationBell from '../social/NotificationBell';
 import './Navbar.css';
 
 const Navbar = () => {
@@ -42,6 +43,7 @@ const Navbar = () => {
                 </ul>
 
                 <div className="nav-actions">
+                    <NotificationBell />
                     <Link to="/register">
                         <Button variant="primary">Join Mission</Button>
                     </Link> {/* TODO: Might want to hide this on mobile if space is tight */}

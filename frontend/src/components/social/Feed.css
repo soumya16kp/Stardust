@@ -13,6 +13,13 @@
     border-bottom: 1px solid #1f2023;
 }
 
+.feed-header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+}
+
 .feed-header h2 {
     font-size: 20px;
     font-weight: 700;
@@ -25,9 +32,88 @@
     color: #b5bac1;
 }
 
+.community-badge {
+    display: inline-block;
+    background-color: #3f4147;
+    color: #dbdee1;
+    font-size: 11px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    text-transform: capitalize;
+    margin-top: 4px;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.admin-badge {
+    background-color: #5865f2;
+    color: white;
+    font-size: 11px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 700;
+}
+
+.feed-tabs {
+    display: flex;
+    gap: 16px;
+}
+
+.feed-tab {
+    background: none;
+    border: none;
+    color: #949ba4;
+    font-weight: 600;
+    cursor: pointer;
+    padding-bottom: 4px;
+    border-bottom: 2px solid transparent;
+}
+
+.feed-tab.active {
+    color: white;
+    border-bottom: 2px solid #5865f2;
+}
+
+.feed-tab:hover:not(.active) {
+    color: #dbdee1;
+}
+
 .loading-posts,
 .no-posts {
     text-align: center;
     padding: 40px;
     color: #949ba4;
+}
+
+/* Pending Requests */
+.pending-requests {
+    background-color: #2b2d31;
+    padding: 16px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #eab308;
+    /* Yellow border for attention */
+}
+
+.pending-requests h3 {
+    font-size: 14px;
+    color: #eab308;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+}
+
+.pending-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid #3f4147;
+}
+
+.pending-item:last-child {
+    border-bottom: none;
 }

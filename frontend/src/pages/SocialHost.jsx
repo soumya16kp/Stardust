@@ -8,18 +8,23 @@ const SocialHost = () => {
     const [communities, setCommunities] = useState([]);
     const [activeCommunity, setActiveCommunity] = useState(null);
 
+    const fetchCommunities = async () => {
+        try {
+            const data = await getCommunities();
+            setCommunities(data);
+        } catch (error) {
+            console.error("Failed to load communities", error);
+        }
+    };
+
     useEffect(() => {
-        const fetchCommunities = async () => {
-            try {
-                const data = await getCommunities();
-                setCommunities(data);
-                // Optional: Set default community or leave as Home (null)
-            } catch (error) {
-                console.error("Failed to load communities", error);
-            }
-        };
         fetchCommunities();
     }, []);
+
+    const handleCommunityCreated = (newCommunity) => {
+        setCommunities([...communities, newCommunity]);
+        setActiveCommunity(newCommunity);
+    };
 
     return (
         <div className="social-layout">
@@ -27,9 +32,10 @@ const SocialHost = () => {
                 communities={communities}
                 activeCommunity={activeCommunity}
                 onSelectCommunity={setActiveCommunity}
+                onCommunityCreated={handleCommunityCreated}
             />
             <div className="social-main">
-                <Feed activeCommunity={activeCommunity} />
+                <Feed activeCommunity={activeCommunity} onMembershipChange={fetchCommunities} />
             </div>
             <div className="social-right-sidebar">
                 {/* Future: Members list, Trending, etc */}

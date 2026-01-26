@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { likePost } from '../../services/socialApi';
+import ReportModal from './ReportModal';
 import './PostCard.css';
 
 const PostCard = ({ post }) => {
     const [liked, setLiked] = useState(post.is_liked);
     const [likesCount, setLikesCount] = useState(post.likes_count);
     const [isLikeLoading, setIsLikeLoading] = useState(false);
+    const [showReport, setShowReport] = useState(false);
 
     const handleLike = async () => {
         if (isLikeLoading) return;
@@ -38,14 +40,25 @@ const PostCard = ({ post }) => {
                     <span className="post-date">{new Date(post.created_at).toLocaleDateString()}</span>
                 </div>
             </div>
+
             <div className="post-content">
                 {post.content}
             </div>
+
             {post.image && (
                 <div className="post-image-container">
                     <img src={post.image} alt="Post content" className="post-image" />
                 </div>
             )}
+            {post.video && (
+                <div className="post-video-container">
+                    <video controls className="post-video">
+                        <source src={post.video} type="video/mp4" />
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            )}
+
             <div className="post-actions">
                 <button className={`action-btn ${liked ? 'liked' : ''}`} onClick={handleLike}>
                     ❤️ {likesCount}
@@ -53,10 +66,18 @@ const PostCard = ({ post }) => {
                 <button className="action-btn">
                     💬 {post.comments_count} Comments
                 </button>
-                <button className="action-btn">
-                    🚀 Share
+                <button
+                    className="action-btn"
+                    onClick={() => setShowReport(true)}
+                    style={{ marginLeft: 'auto', color: '#949ba4' }}
+                >
+                    🚩 Report
                 </button>
             </div>
+
+            {showReport && (
+                <ReportModal type="post" id={post.id} onClose={() => setShowReport(false)} />
+            )}
         </div>
     );
 };

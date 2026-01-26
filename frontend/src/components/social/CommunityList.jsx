@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './CommunityList.css';
+import { Plus } from 'lucide-react';
+import CreateCommunityModal from './CreateCommunityModal';
 
-const CommunityList = ({ communities, activeCommunity, onSelectCommunity }) => {
+const CommunityList = ({ communities, activeCommunity, onSelectCommunity, onCommunityCreated }) => {
+    const [showCreateModal, setShowCreateModal] = useState(false);
+
     return (
         <div className="community-list">
             <div
@@ -11,7 +15,9 @@ const CommunityList = ({ communities, activeCommunity, onSelectCommunity }) => {
                 <div className="community-icon">🏠</div>
                 <span className="community-tooltip">Home</span>
             </div>
+
             <div className="separator"></div>
+
             {communities.map(community => (
                 <div
                     key={community.id}
@@ -26,6 +32,24 @@ const CommunityList = ({ communities, activeCommunity, onSelectCommunity }) => {
                     <span className="community-tooltip">{community.name}</span>
                 </div>
             ))}
+
+            <div
+                className="community-item create-community-btn"
+                onClick={() => setShowCreateModal(true)}
+            >
+                <Plus size={24} className="available-icon" style={{ color: '#23a559' }} />
+                <span className="community-tooltip">Create Community</span>
+            </div>
+
+            {showCreateModal && (
+                <CreateCommunityModal
+                    onClose={() => setShowCreateModal(false)}
+                    onCreated={(newCommunity) => {
+                        onCommunityCreated(newCommunity);
+                        setShowCreateModal(false);
+                    }}
+                />
+            )}
         </div>
     );
 };

@@ -4,24 +4,25 @@ import './CreatePost.css';
 
 const CreatePost = ({ community, onPostCreated }) => {
     const [content, setContent] = useState('');
+    const [video, setVideo] = useState(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!content.trim() || !community) return;
+        if ((!content.trim() && !video) || !community) return;
 
         setIsSubmitting(true);
         try {
-            // Need to pass community slug or ID
-            // For now assume backend takes ID, but our serializer might need tweaking or we pass ID in `community` if needed.
-            // Wait, Post model has community FK. Serializer defaults. 
-            // In API we should probably pass community ID.
-            // Let's pass community ID.
-            await createPost({
-                content,
-                community: community.id
-            });
+            const formData = new FormData();
+            formData.append('content', content);
+            formData.append('community', community.id);
+            if (video) {
+                formData.append('video', video);
+            }
+
+            await createPost(formData);
             setContent('');
+            setVideo(null);
             if (onPostCreated) onPostCreated();
         } catch (error) {
             console.error("Failed to create post:", error);
@@ -42,11 +43,17 @@ const CreatePost = ({ community, onPostCreated }) => {
                     onChange={(e) => setContent(e.target.value)}
                     disabled={isSubmitting}
                 />
-                <div className="create-post-footer">
+                <div className="create-post-footer" style={{ justifyContent: 'space-between', alignItems: 'center' }}>
+                    <input
+                        type="file"
+                        accept="video/*"
+                        onChange={(e) => setVideo(e.target.files[0])}
+                        style={{ color: '#b5bac1', fontSize: '12px' }}
+                    />
                     <button
                         type="submit"
                         className="post-submit-btn"
-                        disabled={isSubmitting || !content.trim()}
+                        disabled={isSubmitting || (!content.trim() && !video)}
                     >
                         {isSubmitting ? 'Posting...' : 'Post'}
                     </button>
