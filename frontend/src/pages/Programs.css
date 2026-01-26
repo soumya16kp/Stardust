@@ -1,0 +1,47 @@
+.filters {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 50px;
+}
+
+.filter-btn {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--text-dim);
+    padding: 8px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+    background: var(--cosmic-purple);
+    color: white;
+    border-color: var(--cosmic-purple);
+    box-shadow: 0 0 10px rgba(124, 58, 237, 0.5);
+}
+
+.program-badge {
+    display: inline-block;
+    background: rgba(0, 212, 255, 0.1);
+    color: var(--neon-blue);
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    margin-bottom: 15px;
+}
+
+.program-actions {
+    margin-top: 20px;
+}
+
+.mt-2 {
+    margin-top: 0.5rem;
+}
+
+.mt-auto {
+    margin-top: auto;
+}

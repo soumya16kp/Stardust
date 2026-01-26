@@ -1,0 +1,96 @@
+.post-card {
+    background-color: #2b2d31;
+    /* Discord dark grey */
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+    color: #dbdee1;
+    border: 1px solid #1f2023;
+}
+
+.post-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.post-author-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #5865f2;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    margin-right: 12px;
+}
+
+.post-meta {
+    display: flex;
+    flex-direction: column;
+}
+
+.post-author {
+    font-weight: 600;
+    color: white;
+}
+
+.post-community {
+    font-size: 12px;
+    color: #949ba4;
+}
+
+.post-date {
+    font-size: 11px;
+    color: #72767d;
+}
+
+.post-content {
+    margin-bottom: 12px;
+    line-height: 1.5;
+    white-space: pre-wrap;
+}
+
+.post-image-container {
+    margin-bottom: 12px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.post-image {
+    max-width: 100%;
+    display: block;
+}
+
+.post-actions {
+    display: flex;
+    gap: 16px;
+    border-top: 1px solid #3f4147;
+    padding-top: 12px;
+}
+
+.action-btn {
+    background: none;
+    border: none;
+    color: #b5bac1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.action-btn:hover {
+    background-color: #3f4147;
+    color: white;
+}
+
+.action-btn.liked {
+    color: #f23f43;
+    /* Discord red-ish for like */
+}

@@ -1,0 +1,25 @@
+.card {
+    background: rgba(10, 10, 12, 0.6);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--space-border);
+    border-radius: 8px;
+    /* Sharper corners */
+    overflow: hidden;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.card:hover {
+    border-color: var(--text-tertiary);
+    transform: translateY(-2px);
+    /* No heavy shadow or glow - keep it clean */
+}
+
+.card-content {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}

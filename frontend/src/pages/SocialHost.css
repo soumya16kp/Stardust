@@ -1,0 +1,50 @@
+.social-layout {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+    position: fixed;
+    /* Overlay on top of the main app scroll */
+    top: 72px;
+    /* Offset for Header/Navbar */
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 72px);
+    z-index: 90;
+    /* Ensure it sits on top but below modal overlays if any */
+    background-color: #313338;
+}
+
+.social-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: #313338;
+}
+
+.social-right-sidebar {
+    width: 240px;
+    background-color: #2b2d31;
+    border-left: 1px solid #1f2023;
+    padding: 20px;
+    display: none;
+    /* Hide on smaller screens */
+}
+
+@media (min-width: 1200px) {
+    .social-right-sidebar {
+        display: block;
+    }
+}
+
+.right-sidebar-panel h3 {
+    font-size: 12px;
+    text-transform: uppercase;
+    color: #949ba4;
+    margin-bottom: 12px;
+    font-weight: 700;
+}
+
+.user-list-placeholder {
+    color: #80848e;
+    font-size: 14px;
+}

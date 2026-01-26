@@ -1,0 +1,71 @@
+.page-title {
+    font-size: 3rem;
+    margin-bottom: 60px;
+    padding-top: 40px;
+}
+
+.mission-section {
+    max-width: 800px;
+    margin: 0 auto 80px;
+    text-align: center;
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: var(--text-dim);
+}
+
+.timeline-section {
+    margin-bottom: 80px;
+}
+
+.timeline {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.timeline-item {
+    text-align: center;
+    position: relative;
+    width: 200px;
+}
+
+.timeline-item::after {
+    content: '';
+    position: absolute;
+    top: 20px;
+    right: -20px;
+    width: 40px;
+    height: 2px;
+    background: var(--cosmic-purple);
+    opacity: 0.5;
+}
+
+.timeline-item:last-child::after {
+    display: none;
+}
+
+.year {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--neon-blue);
+    margin-bottom: 10px;
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+}
+
+.team-img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    border: 3px solid var(--cosmic-purple);
+}
+
+.mb-5 {
+    margin-bottom: 3rem;
+}

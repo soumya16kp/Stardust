@@ -1,0 +1,43 @@
+.programs-section {
+    position: relative;
+    z-index: 1;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    margin-bottom: 60px;
+    text-align: center;
+}
+
+.programs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.program-card-content {
+    text-align: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.program-icon-wrapper {
+    background: rgba(255, 255, 255, 0.05);
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+.text-gradient {
+    color: var(--neon-blue);
+    /* Fallback */
+}
+
+.mt-auto {
+    margin-top: auto;
+}

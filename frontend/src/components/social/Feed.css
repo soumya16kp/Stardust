@@ -1,0 +1,33 @@
+.feed-container {
+    flex: 1;
+    background-color: #313338;
+    height: 100vh;
+    padding: 20px;
+    overflow-y: auto;
+    color: #dbdee1;
+}
+
+.feed-header {
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #1f2023;
+}
+
+.feed-header h2 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 4px;
+    color: white;
+}
+
+.feed-header-desc {
+    font-size: 14px;
+    color: #b5bac1;
+}
+
+.loading-posts,
+.no-posts {
+    text-align: center;
+    padding: 40px;
+    color: #949ba4;
+}
