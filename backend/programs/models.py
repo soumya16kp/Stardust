@@ -24,6 +24,8 @@ class Program(models.Model):
     
     # Metadata
     instructor = models.CharField(max_length=100, help_text="Mission Commander / Speaker")
+    instructor_bio = models.TextField(blank=True, help_text="Brief bio of the commander")
+    instructor_image_url = models.URLField(blank=True, null=True, help_text="Avatar URL for the commander")
     duration = models.CharField(max_length=50, help_text="e.g. '4 Weeks' or '2 Hours'")
     start_date = models.DateTimeField(default=timezone.now)
     is_live = models.BooleanField(default=False)

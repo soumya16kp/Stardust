@@ -56,53 +56,72 @@ const ProgramDetail = () => {
 
                 {/* Hero Card */}
                 <div className="detail-hero">
+                    <div className="hero-background" style={{ backgroundImage: `url(${program.image_url || 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop'})` }}></div>
+                    <div className="hero-overlay"></div>
+
                     <div className="detail-hero-content">
-                        <div className="detail-badges">
-                            <span className={`badge type-badge ${program.program_type}`}>
-                                {program.program_type}
-                            </span>
-                            <span className={`badge difficulty ${program.difficulty}`}>
-                                {program.difficulty}
-                            </span>
+                        <div className="hero-main">
+                            <div className="program-info">
+                                <div className="detail-badges">
+                                    <span className={`badge type-badge ${program.program_type}`}>
+                                        {program.program_type}
+                                    </span>
+                                    <span className={`badge difficulty ${program.difficulty}`}>
+                                        {program.difficulty}
+                                    </span>
+                                </div>
+
+                                <h1 className="detail-title">
+                                    {program.title}
+                                </h1>
+
+                                <p className="detail-desc">
+                                    {program.description}
+                                </p>
+
+                                <div className="action-area">
+                                    {program.is_enrolled ? (
+                                        <Button variant="secondary" className="btn-active">
+                                            <CheckCircle size={20} /> Mission Active
+                                        </Button>
+                                    ) : (
+                                        <Button
+                                            onClick={handleEnroll}
+                                            disabled={enrolling}
+                                            className="btn-enroll"
+                                        >
+                                            {enrolling ? 'Processing...' : isHackathon ? 'Register Team' : 'Enroll Now'}
+                                        </Button>
+                                    )}
+                                </div>
+                            </div>
+
+                            {/* Instructor / Commander Profile */}
+                            <div className="instructor-profile">
+                                <div className="instructor-avatar">
+                                    <img src={program.instructor_image_url || 'https://api.dicebear.com/7.x/avataaars/svg?seed=' + program.instructor} alt={program.instructor} />
+                                </div>
+                                <div className="instructor-info">
+                                    <span className="instructor-label">Mission Commander</span>
+                                    <h3 className="instructor-name">{program.instructor}</h3>
+                                    <p className="instructor-bio">{program.instructor_bio || "Expert in orbital mechanics and propulsion systems. Leading missions since 2024."}</p>
+                                </div>
+                            </div>
                         </div>
 
-                        <h1 className="detail-title">
-                            {program.title}
-                        </h1>
-
-                        <p className="detail-desc">
-                            {program.description}
-                        </p>
-
-                        <div className="detail-stats">
+                        <div className="detail-stats-row">
                             <div className="stat-item">
-                                <Users size={20} className="icon-blue" />
-                                <span>Commander: {program.instructor}</span>
+                                <Clock size={18} className="icon-blue" />
+                                <span>{program.duration}</span>
                             </div>
                             <div className="stat-item">
-                                <Clock size={20} className="icon-blue" />
-                                <span>Duration: {program.duration}</span>
+                                <Shield size={18} className="icon-purple" />
+                                <span>{program.xp_reward} XP</span>
                             </div>
                             <div className="stat-item">
-                                <Shield size={20} className="icon-purple" />
-                                <span>XP Reward: {program.xp_reward}</span>
+                                <Users size={18} className="icon-green" />
+                                <span>Open Access</span>
                             </div>
-                        </div>
-
-                        <div className="action-area">
-                            {program.is_enrolled ? (
-                                <Button variant="secondary" className="btn-active">
-                                    <CheckCircle size={20} /> Mission Active
-                                </Button>
-                            ) : (
-                                <Button
-                                    onClick={handleEnroll}
-                                    disabled={enrolling}
-                                    className="btn-enroll"
-                                >
-                                    {enrolling ? 'Processing...' : isHackathon ? 'Register Team' : 'Enroll Now'}
-                                </Button>
-                            )}
                         </div>
                     </div>
                 </div>

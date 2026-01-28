@@ -1,6 +1,5 @@
 /* Programs Hub Layout */
 .programs-page {
-    background: var(--space-void);
     min-height: 100vh;
     padding-top: 180px;
     position: relative;
@@ -393,8 +392,8 @@
 }
 
 /* -- PROGRAM DETAIL PAGE -- */
+/* -- PROGRAM DETAIL PAGE -- */
 .program-detail-page {
-    /* Removed background for transparency */
     padding-top: 180px;
     min-height: 100vh;
 }
@@ -413,33 +412,68 @@
     color: #93c5fd;
 }
 
+/* -- HERO SECTION -- */
 .detail-hero {
-    background: linear-gradient(135deg, rgba(30, 41, 59, 0.7), rgba(15, 23, 42, 0.9));
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 20px;
-    padding: 3rem;
-    margin-bottom: 3rem;
     position: relative;
+    border-radius: 24px;
+    margin-bottom: 3rem;
     overflow: hidden;
-    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    background: #0f172a;
+    /* Fallback */
 }
 
-.detail-hero::before {
-    content: '';
+.hero-background {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle at top right, rgba(56, 189, 248, 0.1), transparent);
-    pointer-events: none;
+    background-size: cover;
+    background-position: center;
+    filter: blur(20px);
+    opacity: 0.4;
+    transition: transform 10s ease;
+}
+
+.detail-hero:hover .hero-background {
+    transform: scale(1.05);
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.7));
+    backdrop-filter: blur(10px);
 }
 
 .detail-hero-content {
     position: relative;
     z-index: 2;
-    max-width: 800px;
+    padding: 3rem;
+}
+
+.hero-main {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+@media(min-width: 992px) {
+    .hero-main {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+
+    .program-info {
+        flex: 1;
+        padding-right: 2rem;
+    }
 }
 
 .detail-badges {
@@ -449,7 +483,7 @@
 }
 
 .detail-title {
-    font-size: 3.5rem;
+    font-size: 3rem;
     font-weight: 800;
     color: white;
     margin-bottom: 1rem;
@@ -458,29 +492,85 @@
 }
 
 .detail-desc {
-    font-size: 1.25rem;
+    font-size: 1.15rem;
     color: #cbd5e1;
     margin-bottom: 2rem;
     line-height: 1.7;
     font-weight: 300;
+    max-width: 700px;
 }
 
-.detail-stats {
+/* Instructor Profile Card */
+.instructor-profile {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 1.5rem;
     display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
-    margin-bottom: 2rem;
+    gap: 1.5rem;
+    align-items: center;
+    max-width: 400px;
+    min-width: 320px;
+    backdrop-filter: blur(5px);
+}
+
+.instructor-avatar img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 2px solid #3b82f6;
+    object-fit: cover;
+}
+
+.instructor-info {
+    flex: 1;
+}
+
+.instructor-label {
+    display: block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: #60a5fa;
+    margin-bottom: 0.25rem;
+    letter-spacing: 0.05em;
+    font-weight: 700;
+}
+
+.instructor-name {
+    font-size: 1.25rem;
+    color: white;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.instructor-bio {
+    font-size: 0.85rem;
     color: #94a3b8;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Stats Row */
+.detail-stats-row {
+    display: flex;
+    gap: 2rem;
+    margin-top: 3rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 2rem;
 }
 
 .stat-item {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    background: rgba(255, 255, 255, 0.05);
-    padding: 6px 12px;
-    border-radius: 99px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    gap: 0.75rem;
+    color: #e2e8f0;
+    font-weight: 500;
+    background: transparent;
+    padding: 0;
+    border: none;
 }
 
 .btn-active {
@@ -490,14 +580,15 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    padding: 10px 20px;
-    border-radius: 8px;
+    padding: 12px 24px;
+    border-radius: 12px;
 }
 
 .btn-enroll {
     font-size: 1.1rem;
     padding: 14px 32px;
     box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+    border-radius: 12px;
 }
 
 /* -- DETAIL GRID -- */
