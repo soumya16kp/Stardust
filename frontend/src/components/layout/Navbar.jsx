@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { logout } from '../../store/authSlice';
 import { Rocket, Menu, X } from 'lucide-react';
 import Button from '../ui/Button';
 import NotificationBell from '../social/NotificationBell';
@@ -8,9 +10,18 @@ import './Navbar.css';
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const location = useLocation();
+    const { isAuthenticated } = useSelector(state => state.auth);
+    const dispatch = useDispatch();
 
     const toggleMenu = () => setIsOpen(!isOpen);
     const closeMenu = () => setIsOpen(false);
+
+    const handleLogout = () => {
+        if (window.confirm("Confirm Eject sequence?")) {
+            dispatch(logout());
+            closeMenu();
+        }
+    };
 
     const isActive = (path) => location.pathname === path ? 'active' : '';
 
@@ -39,14 +50,30 @@ const Navbar = () => {
                     <li>
                         <Link to="/social" className={`nav-link ${isActive('/social')}`} onClick={closeMenu}>Social</Link>
                     </li>
-                    {/* Mobile Only CTA if needed, but keeping simple for now */}
+                    {isAuthenticated && (
+                        <li className="mobile-only-link">
+                            <button onClick={handleLogout} className="nav-link" style={{ color: '#f43f5e', textAlign: 'left', background: 'none', border: 'none', font: 'inherit', cursor: 'pointer' }}>Eject</button>
+                        </li>
+                    )}
                 </ul>
 
                 <div className="nav-actions">
                     <NotificationBell />
-                    <Link to="/register">
-                        <Button variant="primary">Join Mission</Button>
-                    </Link> {/* TODO: Might want to hide this on mobile if space is tight */}
+
+                    {isAuthenticated ? (
+                        <>
+                            <Link to="/dashboard">
+                                <Button variant="primary">Dashboard</Button>
+                            </Link>
+                            <Button variant="secondary" onClick={handleLogout} style={{ marginLeft: '8px', color: '#f43f5e', borderColor: 'rgba(244, 63, 94, 0.3)' }} className="desktop-eject">
+                                Eject
+                            </Button>
+                        </>
+                    ) : (
+                        <Link to="/login">
+                            <Button variant="primary">Join Mission</Button>
+                        </Link>
+                    )}
 
                     <button className="mobile-toggle" onClick={toggleMenu}>
                         {isOpen ? <X size={28} /> : <Menu size={28} />}

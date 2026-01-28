@@ -53,23 +53,35 @@ const Feed = ({ activeCommunity, onMembershipChange }) => {
         }
     };
 
+    const [joining, setJoining] = useState(false);
+
     const handleJoin = async () => {
         if (!activeCommunity) return;
+        setJoining(true);
         try {
             await joinCommunity(activeCommunity.slug);
-            if (onMembershipChange) onMembershipChange();
+            if (onMembershipChange) await onMembershipChange();
         } catch (error) {
             console.error("Failed to join", error);
+            alert("Failed to join community: " + (error.response?.data?.detail || "Unknown error"));
+        } finally {
+            setJoining(false);
         }
     };
 
     const handleLeave = async () => {
         if (!activeCommunity) return;
+        if (!window.confirm("Are you sure you want to leave this community?")) return;
+
+        setJoining(true);
         try {
             await leaveCommunity(activeCommunity.slug);
-            if (onMembershipChange) onMembershipChange();
+            if (onMembershipChange) await onMembershipChange();
         } catch (error) {
             console.error("Failed to leave", error);
+            alert("Failed to leave community: " + (error.response?.data?.detail || "Unknown error"));
+        } finally {
+            setJoining(false);
         }
     };
 
@@ -77,9 +89,16 @@ const Feed = ({ activeCommunity, onMembershipChange }) => {
     const showJoinButton = activeCommunity && !activeCommunity.is_member;
     const isAdmin = activeCommunity && activeCommunity.role === 'admin';
 
+
+    const handlePostDelete = (postId) => {
+        setPosts(prev => prev.filter(p => p.id !== postId));
+    };
+
     return (
         <div className="feed-container">
+            {/* ... header ... */}
             <div className="feed-header">
+                {/* ... existing header content ... */}
                 <div className="feed-header-top">
                     <div>
                         <h2>{activeCommunity ? activeCommunity.name : 'Home'}</h2>
@@ -90,10 +109,14 @@ const Feed = ({ activeCommunity, onMembershipChange }) => {
                     </div>
                     <div className="header-actions">
                         {showJoinButton && (
-                            <Button onClick={handleJoin} variant="primary">Join Community</Button>
+                            <Button onClick={handleJoin} variant="primary" disabled={joining}>
+                                {joining ? "Joining..." : "Join Community"}
+                            </Button>
                         )}
                         {activeCommunity && activeCommunity.is_member && !isAdmin && (
-                            <Button onClick={handleLeave} variant="secondary" style={{ fontSize: '12px', padding: '4px 8px' }}>Leave</Button>
+                            <Button onClick={handleLeave} variant="secondary" style={{ fontSize: '12px', padding: '4px 8px' }} disabled={joining}>
+                                {joining ? "Leaving..." : "Leave"}
+                            </Button>
                         )}
                         {isAdmin && (
                             <div className="admin-badge">Admin</div>
@@ -138,7 +161,7 @@ const Feed = ({ activeCommunity, onMembershipChange }) => {
                     <div className="loading-posts">Loading posts...</div>
                 ) : posts.length > 0 ? (
                     posts.map(post => (
-                        <PostCard key={post.id} post={post} />
+                        <PostCard key={post.id} post={post} onDelete={handlePostDelete} />
                     ))
                 ) : (
                     <div className="no-posts">

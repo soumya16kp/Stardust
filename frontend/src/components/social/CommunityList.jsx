@@ -6,6 +6,9 @@ import CreateCommunityModal from './CreateCommunityModal';
 const CommunityList = ({ communities, activeCommunity, onSelectCommunity, onCommunityCreated }) => {
     const [showCreateModal, setShowCreateModal] = useState(false);
 
+    const joinedCommunities = communities.filter(c => c.membership_status === 'accepted');
+    const otherCommunities = communities.filter(c => c.membership_status !== 'accepted');
+
     return (
         <div className="community-list">
             <div
@@ -18,7 +21,8 @@ const CommunityList = ({ communities, activeCommunity, onSelectCommunity, onComm
 
             <div className="separator"></div>
 
-            {communities.map(community => (
+            {/* Joined Communities */}
+            {joinedCommunities.map(community => (
                 <div
                     key={community.id}
                     className={`community-item ${activeCommunity?.id === community.id ? 'active' : ''}`}
@@ -32,6 +36,36 @@ const CommunityList = ({ communities, activeCommunity, onSelectCommunity, onComm
                     <span className="community-tooltip">{community.name}</span>
                 </div>
             ))}
+
+            {joinedCommunities.length > 0 && otherCommunities.length > 0 && (
+                <div className="separator"></div>
+            )}
+
+            {/* Other Communities (Discover) */}
+            {otherCommunities.map(community => (
+                <div
+                    key={community.id}
+                    className={`community-item ${activeCommunity?.id === community.id ? 'active' : ''}`}
+                    onClick={() => onSelectCommunity(community)}
+                >
+                    {community.icon ? (
+                        <img src={community.icon} alt={community.name} className="community-img" style={{ opacity: community.membership_status === 'pending' ? 0.5 : 0.7 }} />
+                    ) : (
+                        <div className="community-icon" style={{ opacity: community.membership_status === 'pending' ? 0.5 : 0.7 }}>{community.name.charAt(0)}</div>
+                    )}
+
+                    {community.membership_status === 'pending' && (
+                        <div className="pending-badge-icon" style={{ position: 'absolute', bottom: -2, right: -2, fontSize: '10px' }}>⏳</div>
+                    )}
+
+                    <span className="community-tooltip">
+                        {community.name}
+                        {community.membership_status === 'pending' ? ' (Pending)' : ' (Join)'}
+                    </span>
+                </div>
+            ))}
+
+            <div className="separator"></div>
 
             <div
                 className="community-item create-community-btn"

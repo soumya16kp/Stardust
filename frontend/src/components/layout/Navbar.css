@@ -97,4 +97,16 @@
     .mobile-toggle {
         display: block;
     }
+
+    .desktop-eject {
+        display: none;
+    }
+
+    .mobile-only-link {
+        display: block;
+    }
+}
+
+.mobile-only-link {
+    display: none;
 }

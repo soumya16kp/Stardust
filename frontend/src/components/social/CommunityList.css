@@ -61,7 +61,7 @@
 .community-tooltip {
     position: absolute;
     left: 60px;
-    background-color: BLACK;
+    background-color: #000000;
     color: white;
     padding: 6px 10px;
     border-radius: 4px;

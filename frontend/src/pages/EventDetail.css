@@ -1,0 +1,337 @@
+.event-detail-page {
+    background: var(--space-void);
+    min-height: 100vh;
+}
+
+.event-hero {
+    height: 60vh;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 4rem;
+    margin-top: -64px;
+    /* Pull behind navbar */
+}
+
+.hero-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, var(--space-void) 0%, rgba(13, 14, 18, 0.8) 50%, rgba(13, 14, 18, 0.4) 100%);
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #94a3b8;
+    margin-bottom: 2rem;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.back-link:hover {
+    color: white;
+}
+
+.hero-badges {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 1rem;
+}
+
+.hero-badge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.hero-badge.category {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #e2e8f0;
+}
+
+.hero-badge.live {
+    background: #dc2626;
+    color: white;
+    display: flex;
+    align-items: center;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: white;
+    margin-bottom: 2rem;
+    line-height: 1.1;
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.hero-meta {
+    display: flex;
+    gap: 3rem;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    display: inline-flex;
+}
+
+.meta-block {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.meta-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: #64748b;
+    margin-bottom: 2px;
+}
+
+.meta-value {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #e2e8f0;
+}
+
+.event-content-layout {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 3rem;
+    padding-top: 3rem;
+    padding-bottom: 4rem;
+}
+
+/* Glass Content Boxes */
+.detail-section {
+    margin-bottom: 3rem;
+}
+
+.detail-section h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.science-box,
+.launch-box,
+.viewing-box {
+    padding: 2rem;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.science-box:hover,
+.launch-box:hover,
+.viewing-box:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.3);
+}
+
+/* Internal stat cards adjustment */
+.stat-card {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 1.25rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: transform 0.2s;
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-card:hover {
+    transform: translateY(-2px);
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.stat-card span {
+    font-size: 0.8rem;
+    color: #64748b;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+}
+
+.stat-card strong {
+    font-size: 1.1rem;
+    color: #e2e8f0;
+}
+
+.action-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 2rem;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+    /* Sticky fix */
+    position: sticky;
+    top: 100px;
+    z-index: 10;
+}
+
+@media (max-width: 1024px) {
+    .event-content-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .hero-meta {
+        flex-direction: column;
+        gap: 1rem;
+        width: 100%;
+    }
+}
+
+/* Replaced Tailwind Utilities */
+.mission-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.section-icon {
+    display: inline-block;
+    margin-right: 0.5rem;
+}
+
+.section-icon.launch {
+    color: #fb923c;
+}
+
+/* orange-400 */
+.section-icon.viewing {
+    color: #4ade80;
+}
+
+/* green-400 */
+.section-icon.science {
+    color: #c084fc;
+}
+
+/* purple-400 */
+
+.mission-details-text {
+    margin-top: 1rem;
+    color: #9ca3af;
+    /* gray-400 */
+}
+
+.optics-container {
+    margin-top: 1rem;
+    padding: 0.75rem;
+    background: rgba(255, 255, 255, 0.05);
+    /* bg-white/5 */
+    border-radius: 0.5rem;
+    /* rounded-lg */
+    display: inline-block;
+}
+
+.optics-label {
+    color: #9ca3af;
+    /* gray-400 */
+    font-size: 0.875rem;
+    /* text-sm */
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    /* tracking-wider */
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
+.optics-value {
+    font-size: 1.25rem;
+    /* text-xl */
+    text-transform: capitalize;
+    font-weight: 500;
+    color: white;
+}
+
+/* Sidebar Styles */
+.attendance-status {
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.attend-count {
+    font-size: 2.25rem;
+    /* text-4xl */
+    font-weight: 700;
+    color: white;
+    margin-bottom: 0.25rem;
+}
+
+.attend-label {
+    font-size: 0.875rem;
+    /* text-sm */
+    color: #9ca3af;
+    /* gray-400 */
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    /* tracking-widest */
+}
+
+.sidebar-btn {
+    width: 100%;
+    margin-bottom: 0.75rem;
+    justify-content: center;
+}
+
+.sidebar-btn.last {
+    margin-bottom: 1.5rem;
+}
+
+.official-link-box {
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.official-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #60a5fa;
+    /* blue-400 */
+    transition: color 0.2s;
+    font-size: 0.95rem;
+}
+
+.official-link:hover {
+    color: #93c5fd;
+    /* blue-300 */
+}

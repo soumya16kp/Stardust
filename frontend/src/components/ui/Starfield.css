@@ -12,20 +12,7 @@
     overflow: hidden;
 }
 
-.glowing-orb {
-    position: absolute;
-    top: 20%;
-    left: -100px;
-    width: 400px;
-    height: 400px;
-    background: rgba(255, 221, 50, 0.725);
-    /* Brighter yellow, higher opacity */
-    filter: blur(40px);
-    /* Reduced blur */
-    border-radius: 50%;
-    z-index: 0;
-    animation: drift 10s ease-in-out infinite alternate;
-}
+
 
 .star {
     position: absolute;

@@ -55,6 +55,9 @@ const Login = () => {
                                 {loading ? 'Initializing...' : 'Initiate Sequence'}
                             </Button>
                         </form>
+                        <div className="auth-footer">
+                            <p>Don't have an account? <span onClick={() => navigate('/register')}>Join Mission</span></p>
+                        </div>
                     </div>
                 </Card>
             </div>

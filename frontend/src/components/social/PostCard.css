@@ -1,103 +1,221 @@
 .post-card {
-    background-color: #2b2d31;
-    /* Discord dark grey */
-    border-radius: 8px;
-    padding: 16px;
-    margin-bottom: 16px;
-    color: #dbdee1;
-    border: 1px solid #1f2023;
+    background: rgba(16, 20, 29, 0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.post-card:hover {
+    border-color: rgba(255, 255, 255, 0.15);
 }
 
 .post-header {
     display: flex;
     align-items: center;
-    margin-bottom: 12px;
+    margin-bottom: 1rem;
+    justify-content: space-between;
 }
 
 .post-author-avatar {
-    width: 40px;
-    height: 40px;
+    width: 42px;
+    height: 42px;
     border-radius: 50%;
-    background-color: #5865f2;
+    background: linear-gradient(135deg, #6366f1, #a855f7);
     color: white;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-weight: bold;
+    font-weight: 700;
     margin-right: 12px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.post-author-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .post-meta {
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
 }
 
 .post-author {
+    font-size: 1rem;
     font-weight: 600;
-    color: white;
+    color: #f8fafc;
+    line-height: 1.2;
+}
+
+.post-sub-meta {
+    display: flex;
+    align-items: center;
+    font-size: 0.8rem;
+    color: #94a3b8;
+    margin-top: 2px;
 }
 
 .post-community {
-    font-size: 12px;
-    color: #949ba4;
+    color: var(--accent-blue);
+    font-weight: 500;
 }
 
-.post-date {
-    font-size: 11px;
-    color: #72767d;
+.meta-dot {
+    margin: 0 6px;
+    opacity: 0.5;
+}
+
+.post-time {
+    display: flex;
+    align-items: center;
+}
+
+.post-options-btn {
+    background: transparent;
+    border: none;
+    color: #64748b;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    transition: color 0.2s, background 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.post-options-btn:hover {
+    color: #f1f5f9;
+    background: rgba(255, 255, 255, 0.05);
 }
 
 .post-content {
-    margin-bottom: 12px;
-    line-height: 1.5;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #e2e8f0;
+    margin-bottom: 1rem;
     white-space: pre-wrap;
 }
 
 .post-image-container,
 .post-video-container {
-    margin-bottom: 12px;
-    border-radius: 8px;
+    margin-bottom: 1rem;
+    border-radius: 12px;
     overflow: hidden;
-    background-color: black;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.post-image {
-    max-width: 100%;
-    display: block;
-}
-
+.post-image,
 .post-video {
     width: 100%;
-    max-height: 500px;
+    display: block;
 }
 
 .post-actions {
     display: flex;
-    gap: 16px;
-    border-top: 1px solid #3f4147;
-    padding-top: 12px;
+    gap: 15px;
+    padding-top: 10px;
+}
+
+.post-document-container {
+    margin: 10px 0;
+}
+
+.post-document-link {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 12px;
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: all 0.2s;
+}
+
+.post-document-link:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.doc-icon-wrapper {
+    background: rgba(56, 189, 248, 0.1);
+    color: var(--primary);
+    padding: 10px;
+    border-radius: 6px;
+    margin-right: 12px;
+}
+
+.doc-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.doc-name {
+    font-weight: 500;
+    font-size: 0.95rem;
+    margin-bottom: 2px;
+    word-break: break-all;
+}
+
+.doc-type {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.doc-download-icon {
+    color: var(--text-secondary);
+    margin-left: 10px;
+}
+
+.post-actions {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .action-btn {
-    background: none;
+    background: transparent;
     border: none;
-    color: #b5bac1;
-    cursor: pointer;
+    color: #94a3b8;
+    font-size: 0.9rem;
+    font-weight: 500;
     display: flex;
     align-items: center;
-    gap: 6px;
-    font-size: 13px;
-    padding: 4px 8px;
-    border-radius: 4px;
-    transition: background-color 0.2s;
+    gap: 8px;
+    cursor: pointer;
+    padding: 0;
+    transition: all 0.2s ease;
 }
 
 .action-btn:hover {
-    background-color: #3f4147;
-    color: white;
+    color: #f8fafc;
+    transform: translateY(-1px);
 }
 
 .action-btn.liked {
-    color: #f23f43;
-    /* Discord red-ish for like */
+    color: #f43f5e;
+}
+
+.fill-current {
+    fill: currentColor;
+}
+
+.post-author-link {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    align-items: center;
+}
+
+.post-author-link:hover .post-author {
+    color: #3b82f6;
+    text-decoration: underline;
 }

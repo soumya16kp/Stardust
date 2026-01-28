@@ -67,9 +67,18 @@ class CommunityViewSet(viewsets.ModelViewSet):
         
         data = []
         for m in members:
+            # Get profile
+            profile = None
+            if hasattr(m.user, 'profile'):
+                profile = m.user.profile
+
             data.append({
                 'user_id': m.user.id,
                 'username': m.user.username,
+                'avatar': profile.avatar.url if profile and profile.avatar else None,
+                'bio': profile.bio if profile else '',
+                'is_online': profile.is_online if profile else False,
+                'last_activity': profile.last_activity if profile else None,
                 'status': m.status,
                 'role': m.role,
                 'is_muted': m.is_muted,
@@ -108,7 +117,30 @@ class PostViewSet(viewsets.ModelViewSet):
             if member and member.is_muted:
                  raise serializers.ValidationError("You are muted in this community.")
 
-        serializer.save(author=self.request.user)
+        # Save post
+        post = serializer.save(author=self.request.user)
+
+        # Handle Poll Creation
+        poll_question = self.request.data.get('poll_question')
+        poll_options = self.request.data.getlist('poll_options[]') if 'poll_options[]' in self.request.data else self.request.data.get('poll_options')
+        
+        # If multipart/form-data, options might be separate keys or a list depending on frontend
+        # Assuming list of strings
+        
+        if poll_question and poll_options:
+            from .models import Poll, PollOption
+            poll = Poll.objects.create(post=post, question=poll_question)
+            
+            # Handle list if it's not a list (e.g., from json vs form-data)
+            if isinstance(poll_options, str): 
+                # Basic split if comma separated, but frontend should send array or multiple keys
+                # Simplify: expect array or list
+                pass
+
+            for opt_text in poll_options:
+                if opt_text.strip():
+                    PollOption.objects.create(poll=poll, text=opt_text.strip())
+
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -133,6 +165,28 @@ class PostViewSet(viewsets.ModelViewSet):
         else:
             post.likes.add(user)
             return Response({'status': 'liked'})
+
+    @decorators.action(detail=True, methods=['post'], permission_classes=[permissions.IsAuthenticated])
+    def vote(self, request, pk=None):
+        from .models import Poll, PollOption, PollVote
+        post = self.get_object()
+        if not hasattr(post, 'poll'):
+             return Response({'detail': 'Post has no poll'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        poll = post.poll
+        option_id = request.data.get('option_id')
+        
+        if not option_id:
+             return Response({'detail': 'Option ID required'}, status=status.HTTP_400_BAD_REQUEST)
+
+        option = get_object_or_404(PollOption, id=option_id, poll=poll)
+        
+        # Check if already voted
+        if PollVote.objects.filter(poll=poll, user=request.user).exists():
+             return Response({'detail': 'Already voted'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        PollVote.objects.create(poll=poll, option=option, user=request.user)
+        return Response({'status': 'voted'})
 
 class CommentViewSet(viewsets.ModelViewSet):
     queryset = Comment.objects.all().order_by('created_at')

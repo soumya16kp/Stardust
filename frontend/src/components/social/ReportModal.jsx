@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ReactDOM from 'react-dom';
 import { createReport } from '../../services/socialApi';
 import Button from '../ui/Button';
 import './ReportModal.css';
@@ -27,9 +28,9 @@ const ReportModal = ({ type, id, onClose }) => {
         }
     };
 
-    return (
-        <div className="report-modal-overlay">
-            <div className="report-modal-content">
+    return ReactDOM.createPortal(
+        <div className="report-modal-overlay" onClick={onClose}>
+            <div className="report-modal-content" onClick={(e) => e.stopPropagation()}>
                 {success ? (
                     <div className="success-msg">Report submitted. Thank you for keeping us safe. 🛡️</div>
                 ) : (
@@ -50,7 +51,8 @@ const ReportModal = ({ type, id, onClose }) => {
                     </>
                 )}
             </div>
-        </div>
+        </div>,
+        document.body
     );
 };
 

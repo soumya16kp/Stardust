@@ -59,6 +59,9 @@ const Register = () => {
                             </div>
                             <Button type="submit" variant="primary" style={{ width: '100%' }} disabled={loading}>Sign Up</Button>
                         </form>
+                        <div className="auth-footer">
+                            <p>Already have an account? <span onClick={() => navigate('/login')}>Login</span></p>
+                        </div>
                     </div>
                 </Card>
             </div>

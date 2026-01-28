@@ -1,7 +1,7 @@
 import React from 'react';
 import Card from '../ui/Card';
 import Button from '../ui/Button';
-import { Rocket, Box, BrainCircuit } from 'lucide-react';
+import { Rocket, Atom, BrainCircuit } from 'lucide-react';
 import './ProgramsPreview.css';
 
 const programs = [
@@ -17,7 +17,7 @@ const programs = [
     },
     {
         title: 'Astro-Physics',
-        icon: <Box size={40} className="text-gradient" />, // Placeholder icon
+        icon: <Atom size={40} className="text-gradient" />,
         desc: 'Deep dive into black holes, relativity, and the nature of the universe.',
     }
 ];

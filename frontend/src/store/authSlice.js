@@ -39,9 +39,25 @@ export const refreshToken = createAsyncThunk('auth/refreshToken', async (_, { ge
     }
 });
 
+export const loadUser = createAsyncThunk('auth/loadUser', async (_, { rejectWithValue }) => {
+    try {
+        const token = localStorage.getItem('token');
+        if (!token) return rejectWithValue('No token');
+
+        // Use direct axios with header to avoid circular dependency if api.js imports store
+        const response = await axios.get(`${AUTH_URL}/users/me/`, {
+            headers: { Authorization: `Bearer ${token}` }
+        });
+        return response.data;
+    } catch (error) {
+        return rejectWithValue(error.response?.data || 'Failed to load user');
+    }
+});
+
 const initialState = {
     token: localStorage.getItem('token') || null,
     isAuthenticated: !!localStorage.getItem('token'),
+    user: null, // Add user state
     loading: false,
     error: null,
 };
@@ -78,6 +94,15 @@ const authSlice = createSlice({
             .addCase(refreshToken.rejected, (state) => {
                 state.isAuthenticated = false;
                 state.token = null;
+            })
+            .addCase(loadUser.fulfilled, (state, action) => {
+                state.isAuthenticated = true;
+                state.user = action.payload; // Store user data
+            })
+            .addCase(loadUser.rejected, (state) => {
+                // strict logout? maybe not, just invalid user data
+                // state.isAuthenticated = false; 
+                // state.user = null;
             });
     },
 });

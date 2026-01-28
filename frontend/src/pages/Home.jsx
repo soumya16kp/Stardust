@@ -1,10 +1,13 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import Hero from '../components/home/Hero';
 import ProgramsPreview from '../components/home/ProgramsPreview';
 import { Users, BookOpen, Globe, Award } from 'lucide-react';
 import './Home.css';
 
 const Home = () => {
+    const { isAuthenticated } = useSelector(state => state.auth);
     return (
         <div className="home-page">
             <Hero />
@@ -39,7 +42,15 @@ const Home = () => {
             <section className="cta-section section-padding text-center">
                 <div className="container">
                     <h2 className="mb-4">Ready for <span className="text-gradient">Liftoff?</span></h2>
-                    <button className="btn btn-primary">Become a Cadet</button>
+                    {isAuthenticated ? (
+                        <Link to="/dashboard">
+                            <button className="btn btn-primary">Go to Dashboard</button>
+                        </Link>
+                    ) : (
+                        <Link to="/register">
+                            <button className="btn btn-primary">Become a Cadet</button>
+                        </Link>
+                    )}
                 </div>
             </section>
         </div>

@@ -1,59 +1,146 @@
 .create-post {
-    background-color: #2b2d31;
-    border-radius: 8px;
-    padding: 16px;
-    margin-bottom: 20px;
-    border: 1px solid #1f2023;
+    background: rgba(16, 20, 29, 0.8);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 1.25rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 20px -5px rgba(0, 0, 0, 0.3);
 }
 
 .create-post-placeholder {
-    padding: 16px;
-    background-color: #2b2d31;
-    border-radius: 8px;
-    color: #949ba4;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 16px;
+    color: #94a3b8;
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 2rem;
+    border: 1px dashed rgba(255, 255, 255, 0.1);
 }
 
 .post-input {
     width: 100%;
-    background-color: #383a40;
+    background: transparent;
     border: none;
-    border-radius: 4px;
-    padding: 12px;
-    color: white;
+    padding: 0.5rem;
+    color: #f8fafc;
     font-family: inherit;
+    font-size: 1rem;
     resize: vertical;
     min-height: 80px;
     outline: none;
+    line-height: 1.5;
 }
 
-.post-input:focus {
-    background-color: #404249;
+.post-input::placeholder {
+    color: #64748b;
+}
+
+.file-preview {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 8px 12px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    width: fit-content;
+}
+
+.file-name {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.85rem;
+    color: var(--accent-blue);
+}
+
+.remove-file-btn {
+    background: transparent;
+    border: none;
+    color: #94a3b8;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 2px;
+}
+
+.remove-file-btn:hover {
+    color: #f87171;
 }
 
 .create-post-footer {
     display: flex;
-    justify-content: flex-end;
-    margin-top: 12px;
+    justify-content: space-between;
+    /* Retained original value for 'justify-content' as the provided instruction had a syntax error */
+    align-items: center;
+    gap: 15px;
+    /* Added from instruction */
+    margin-top: 0.5rem;
+    /* Retained original value */
+    padding-top: 1rem;
+    /* Retained original value */
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    /* Retained original value */
+}
+
+.media-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.media-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    /* Changed from #64748b */
+    padding: 5px;
+    /* Changed from 8px */
+    border-radius: 5px;
+    /* Changed from 50% */
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    /* Retained original value */
+    align-items: center;
+    /* Retained original value */
+    justify-content: center;
+    /* Retained original value */
+}
+
+.media-btn:hover {
+    color: var(--primary);
+    /* Changed from var(--accent-blue) */
+    background: rgba(255, 255, 255, 0.05);
+    /* Changed from rgba(56, 189, 248, 0.1) */
 }
 
 .post-submit-btn {
-    background-color: #5865f2;
+    background: var(--gradient-primary);
+    /* Changed from var(--accent-blue) */
     color: white;
     border: none;
-    padding: 8px 16px;
-    border-radius: 4px;
+    padding: 0.6rem 1.25rem;
+    border-radius: 50px;
     cursor: pointer;
     font-weight: 600;
-    transition: background-color 0.2s;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    box-shadow: 0 4px 12px rgba(56, 189, 248, 0.25);
 }
 
 .post-submit-btn:hover:not(:disabled) {
-    background-color: #4752c4;
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(56, 189, 248, 0.35);
 }
 
 .post-submit-btn:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+    background: #475569;
+    box-shadow: none;
 }
